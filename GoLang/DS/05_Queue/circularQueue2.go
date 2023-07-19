@@ -1,21 +1,16 @@
-/* ------------------------------ Simple Queue ------------------------------ */
-// In a simple queue, insertion takes place at the tail and removal occurs at the head. It strictly follows the FIFO (First in First out) rule.
-
 package main
 
 import "fmt"
 
 type Queue struct {
 	data []int
-	capacity, head, tail int
+	capacity int
 }
 
 func newQueue(capacity int) *Queue {
 	return &Queue{
-		data: make([]int, capacity),
+		data: make([]int, 0, capacity),
 		capacity: capacity,
-		head: 0,
-		tail: 0,
 	}
 }
 
@@ -26,8 +21,7 @@ func (q *Queue) enqueue(item int) bool {
 		return false
 	}
 
-	q.data[q.tail] = item
-	q.tail += 1
+	q.data = append(q.data, item)
 
 	fmt.Printf("%d has enqueued to the Queue and updated Queue is %v \n", item, q.data)
 
@@ -36,16 +30,14 @@ func (q *Queue) enqueue(item int) bool {
 
 // Remove an element from the front of the queue
 func (q *Queue) dequeue() (int, bool) {
-	item := 0
+	item := -1
 
-	if q.isEmply() {
+	if q.isEmpty() {
         fmt.Println("Queue is empty, unable to dequeue element.")
 		return item, false
 	}
 
-	item = q.data[q.head]
-	q.data[q.head] = 0
-	q.head += 1
+	item, q.data = q.data[0], q.data[1:]
 
 	fmt.Printf("%d has dequeued from the Queue and updated Queue is %v \n\n", item, q.data)
 
@@ -54,12 +46,12 @@ func (q *Queue) dequeue() (int, bool) {
 
 // Get the value of the front of the queue without removing it
 func (q *Queue) peek() (int, bool) {
-	if q.isEmply() {
+	if q.isEmpty() {
 		fmt.Println("Queue is empty, unable to peek element.")
-		return 0, false
+		return -1, false
 	}
 
-	item := q.data[q.head]
+	item := q.data[0]
 
 	fmt.Printf("%d is the peek item of the Queue and the Queue is %v \n", item, q.data)
 
@@ -67,13 +59,13 @@ func (q *Queue) peek() (int, bool) {
 }
 
 // Check if the queue is empty
-func (q *Queue) isEmply() bool {
-	return q.head == q.tail
+func (q *Queue) isEmpty() bool {
+	return len(q.data) == 0
 }
 
 // Check if the queue is full
 func (q *Queue) isFull() bool {
-	return q.tail == q.capacity
+	return len(q.data) == q.capacity
 }
 
 func main() {
@@ -94,6 +86,16 @@ func main() {
 	queue.peek()
 	queue.dequeue()
 
+	queue.enqueue(6)
+
+	queue.peek()
+	queue.dequeue()
+
+	queue.enqueue(7)
+
+	queue.peek()
+	queue.dequeue()
+
 	queue.peek()
 	queue.dequeue()
 
@@ -106,5 +108,5 @@ func main() {
 	queue.peek() // Trying to get peek element from an empty Queue
 	queue.dequeue() // Trying to dequeue element from an empty Queue
 
-	queue.enqueue(7)
+	queue.enqueue(8)
 }

@@ -5,14 +5,12 @@ import "fmt"
 type Stack struct {
     data []int
     capacity int
-	top int
 }
 
 func newStack(capacity int) *Stack {
     return &Stack{
-        data: make([]int, capacity),
+        data: make([]int, 0, capacity),
         capacity: capacity,
-		top: 0,
     }
 }
 
@@ -23,8 +21,7 @@ func (s *Stack) push(item int) bool {
         return false
     }
 
-    s.data[s.top] = item
-	s.top++
+    s.data = append(s.data, item)
 
 	fmt.Printf("%d has pushed to the Stack and updated Stack is %v \n", item, s.data)
 
@@ -40,8 +37,8 @@ func (s *Stack) pop() (int, bool) {
         return item, false
     }
 
-	s.top -= 1
-    item, s.data = s.data[s.top], s.data[:s.top]
+	index := len(s.data) - 1
+    item, s.data = s.data[index], s.data[:index]
 
 	fmt.Printf("%d has popped from the Stack and updated Stack is %v \n\n", item, s.data)
 
@@ -55,7 +52,7 @@ func (s *Stack) peek() (int, bool) {
 		return 0, false
 	}
 
-	item := s.data[s.top - 1]
+	item := s.data[len(s.data) - 1]
 
 	fmt.Printf("%d is the peek item of the Stack and the Stack is %v \n", item, s.data)
 
@@ -64,18 +61,17 @@ func (s *Stack) peek() (int, bool) {
 
 // Check if the stack is empty
 func (s *Stack) isEmpty() bool {
-    return s.top == 0
+    return  len(s.data) == 0
 }
 
 // Check if the stack is full
 func (s *Stack) isFull() bool {
-    return s.top == s.capacity
+    return  len(s.data) == s.capacity
 }
 
 func main() {
     stack := newStack(5)
 
-    fmt.Println("Pushing elements to the stack:")
     stack.push(1)
     stack.push(2)
     stack.push(3)
@@ -83,7 +79,8 @@ func main() {
     stack.push(5)
     stack.push(6) // Trying to push element to a full stack
 
-    fmt.Println("Popping elements from the stack:")
+	fmt.Println("------------------------")
+
     stack.peek() // 5
     stack.pop() // 5
 
@@ -101,4 +98,13 @@ func main() {
 
     stack.peek() // Trying to get peek element from an empty stack
     stack.pop() // Trying to pop element from an empty stack
+    
+	fmt.Println("------------------------")
+
+    stack.push(1)
+    stack.push(2)
+    stack.push(3)
+    stack.push(4)
+    stack.push(5)
+    stack.push(6) // Trying to push element to a full stack
 }

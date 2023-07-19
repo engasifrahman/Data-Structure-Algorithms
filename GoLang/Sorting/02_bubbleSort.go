@@ -1,4 +1,4 @@
-// TODO Problem-1: Bubble Sort
+// TODO Problem-2: Bubble Sort
 
 // Bubble Sort is the simplest sorting algorithm 
 // Bubble Sort works by repeatedly swapping the adjacent elements if they are in the wrong order. 
@@ -14,7 +14,7 @@ func BubbleSort (array []int) []int {
 	n := len(array)
 
 	for i := 1; i < n; i++ {
-		// fmt.Println("Array:", array)
+		fmt.Println("Array:", array)
 
         isSwapped := false;
 
@@ -35,7 +35,7 @@ func BubbleSort (array []int) []int {
 }
 
 func main() {
-	arr := []int{1, 2, 3, 4, 5, 6, 9, 8, 7 }
+	arr := []int{ 9, 8, 7, 6, 5, 4, 3, 2, 1 }
 
 	fmt.Println("Unsorted array:", arr)
 

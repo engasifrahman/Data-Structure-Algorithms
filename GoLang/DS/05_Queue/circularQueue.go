@@ -38,7 +38,7 @@ func (q *Queue) enqueue(item int) bool {
 func (q *Queue) dequeue() (int, bool) {
 	item := 0
 
-	if q.isEmply() {
+	if q.isEmpty() {
         fmt.Println("Queue is empty, unable to dequeue element.")
 		return item, false
 	}
@@ -55,7 +55,7 @@ func (q *Queue) dequeue() (int, bool) {
 
 // Get the value of the front of the queue without removing it
 func (q *Queue) peek() (int, bool) {
-	if q.isEmply() {
+	if q.isEmpty() {
 		fmt.Println("Queue is empty, unable to peek element.")
 		return 0, false
 	}
@@ -68,7 +68,7 @@ func (q *Queue) peek() (int, bool) {
 }
 
 // Check if the queue is empty
-func (q *Queue) isEmply() bool {
+func (q *Queue) isEmpty() bool {
 	return q.head == q.tail
 }
 

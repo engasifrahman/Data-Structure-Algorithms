@@ -50,14 +50,14 @@ func main() {
 	var stack Stack // Declare a stack using a slice
 	// stack := Stack{} // Alternative declaration
 
-	inputItem := 50;
+	inputItem := 10;
 
-    fmt.Println("Pushing elements to the stack:")
 	for i:= 0; i < inputItem; i++ {
 		stack.push(i + 1)
 	}
 
-    fmt.Println("\nPopping elements from the stack:")
+	fmt.Println("------------------------")
+
 	for i:= 0; i < inputItem; i++ {
 		stack.peek()
 		stack.pop()
@@ -65,4 +65,10 @@ func main() {
 	
 	stack.peek()
 	stack.pop()
+
+	fmt.Println("------------------------")
+
+	for i:= 0; i < inputItem; i++ {
+		stack.push(i + 1)
+	}
 }

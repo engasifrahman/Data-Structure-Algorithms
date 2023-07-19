@@ -1,6 +1,0 @@
-1. Map
-2. Pointer
-3. Struct
-4. Stack
-5. Queue
-6. Linked list
