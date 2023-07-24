@@ -75,12 +75,13 @@ func (list *LinkedList) DeleteNode(data int) {
 			prev.next = current.next
 			return
 		}
+		
 		prev = current
 		current = current.next
 	}
 }
 
-// Display the linked list
+// Display (traverse) the linked list
 func (list *LinkedList) Display() {
 	current := list.head
 	for current != nil {
