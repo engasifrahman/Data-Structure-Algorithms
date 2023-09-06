@@ -142,8 +142,8 @@ func main() {
 	InsertLeft(node2, node4)
 	InsertRight(node2, node5)
 
-	InsertLeft(node2, node6)
-	InsertRight(node2, node7)
+	InsertLeft(node3, node6)
+	InsertRight(node3, node7)
 
 	fmt.Print("DisplayPreorder")
 	DisplayPreorder(root)
@@ -154,5 +154,5 @@ func main() {
 	fmt.Print("\nDisplayPostorder")
 	DisplayPostorder(root)
 
-	fmt.Println("IsFullBinaryTree:", isPerfectBinaryTree(root))
+	fmt.Println("\nIsPerfectBinaryTree:", isPerfectBinaryTree(root))
 }

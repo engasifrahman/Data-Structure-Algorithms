@@ -73,6 +73,13 @@ func (q *Queue) isEmpty() bool {
 
 // Check if the queue is full
 func (q *Queue) isFull() bool {
+	if q.isEmpty() {
+		q.tail = 0
+		q.head = 0
+
+		return false
+	}
+
 	return q.tail == q.capacity
 }
 

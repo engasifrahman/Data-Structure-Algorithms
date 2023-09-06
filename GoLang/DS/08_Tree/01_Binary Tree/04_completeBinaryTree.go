@@ -108,7 +108,7 @@ func main() {
 	node3 := CreateNode(3)
 	node4 := CreateNode(4)
 	node5 := CreateNode(5)
-	// node6 := CreateNode(6)
+	node6 := CreateNode(6)
 	node7 := CreateNode(7)
 
 	InsertLeft(root, node2)
@@ -117,7 +117,7 @@ func main() {
 	InsertLeft(node2, node4)
 	InsertRight(node2, node5)
 
-	// InsertLeft(node3, node6)
+	InsertLeft(node3, node6)
 	InsertRight(node3, node7)
 
 	fmt.Print("DisplayPreorder")

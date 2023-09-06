@@ -74,7 +74,7 @@ func DisplayPostorder(tree *Node) {
 	fmt.Print("->", tree.data)
 }
 
-func isFullBinaryTree(tree *Node) bool{
+func isFullBinaryTree(tree *Node) bool {
 	if tree == nil {
 		return true
 	}
@@ -113,5 +113,5 @@ func main() {
 	fmt.Print("\nDisplayPostorder")
 	DisplayPostorder(root)
 
-	fmt.Println("IsFullBinaryTree:", isFullBinaryTree(root))
+	fmt.Println("\nIsFullBinaryTree:", isFullBinaryTree(root))
 }
