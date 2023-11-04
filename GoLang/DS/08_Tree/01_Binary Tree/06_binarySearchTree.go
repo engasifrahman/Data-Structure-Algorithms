@@ -128,7 +128,7 @@ func main() {
 	inorder(root)
 
 	fmt.Println("\nAfter deleting 10")
-	root = deleteNode(root, 10)
+	root = deleteNode(root, 1)
 	fmt.Print("Inorder traversal: ")
 	inorder(root)
 }

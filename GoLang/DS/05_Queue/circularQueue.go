@@ -10,7 +10,7 @@ type Queue struct {
 	capacity, head, tail int
 }
 
-func newQueue(capacity int) *Queue {
+func createQueue(capacity int) *Queue {
 	return &Queue{
 		data: make([]int, capacity + 1),
 		capacity: capacity,
@@ -78,14 +78,18 @@ func (q *Queue) isFull() bool {
 }
 
 func main() {
-	queue := newQueue(5)
-
+	queue := createQueue(5)
+	fmt.Println(queue.data)
     fmt.Println("Enqueuing elements to the Queue:")
 	queue.enqueue(1)
 	queue.enqueue(2)
 	queue.enqueue(3)
+	queue.dequeue()
+	queue.dequeue()
 	queue.enqueue(4)
 	queue.enqueue(5)
+	queue.enqueue(7)
+	queue.enqueue(8)
 	queue.enqueue(6) // Trying to enqueue element to a full Queue
 
     fmt.Println("\nDequeuing elements from the Queue:")

@@ -86,12 +86,17 @@ func checkHeightBalance(root *Node, height *Height) bool {
 		return true
 	}
 
+	fmt.Println("\n------------------")
+	fmt.Println("Node Data: ", root.data)
+
 	var leftHeight, rightHeight Height
 
-	l := checkHeightBalance(root.left, &leftHeight)
+	l := checkHeightBalance(root.left, &leftHeight) 
 	r := checkHeightBalance(root.right, &rightHeight)
 
-	fmt.Println("\nl: ", l)
+	fmt.Println("\nBacktrack for: ", root.data)
+
+	fmt.Println("l: ", l)
 	fmt.Println("r: ", r)
 
 	leftHeightValue, rightHeightValue := leftHeight.height, rightHeight.height
