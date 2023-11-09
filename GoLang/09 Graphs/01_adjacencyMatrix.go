@@ -3,25 +3,25 @@ package main
 import "fmt"
 
 type Graph struct {
-	matrix [][]int
-	size   int
+	matrix   [][]int
+	capacity int
 }
 
-func createGraph(size int) *Graph {
-	adjMatrix := make([][]int, size)
-	for i := 0; i < size; i++ {
-		adjMatrix[i] = make([]int, size)
+func createGraph(capacity int) *Graph {
+	adjMatrix := make([][]int, capacity)
+	for i := 0; i < capacity; i++ {
+		adjMatrix[i] = make([]int, capacity)
 	}
 
 	return &Graph{
-		matrix: adjMatrix,
-		size:   size,
+		matrix:   adjMatrix,
+		capacity: capacity,
 	}
 }
 
 func (g *Graph) addEdge(v1, v2 int) {
-	if v1 >= g.size || v2 >= g.size {
-		fmt.Printf("Vertex %d and %d conbination not allowed due to graph size issue\n", v1, v2)
+	if v1 >= g.capacity || v2 >= g.capacity {
+		fmt.Printf("Vertex %d and %d conbination not allowed due to graph capacity issue\n", v1, v2)
 		return
 	}
 
@@ -30,7 +30,7 @@ func (g *Graph) addEdge(v1, v2 int) {
 }
 
 func (g *Graph) removeEdge(v1, v2 int) {
-	if v1 >= g.size || v2 >= g.size || g.matrix[v1][v2] == 0 {
+	if v1 >= g.capacity || v2 >= g.capacity || g.matrix[v1][v2] == 0 {
 		fmt.Printf("No edge between %d and %d\n", v1, v2)
 		return
 	}

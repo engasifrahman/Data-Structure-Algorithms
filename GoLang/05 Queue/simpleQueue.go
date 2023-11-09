@@ -6,13 +6,13 @@ package main
 import "fmt"
 
 type Queue struct {
-	data []int
+	items []int
 	capacity, head, tail int
 }
 
 func newQueue(capacity int) Queue {
 	return Queue{
-		data: make([]int, capacity),
+		items: make([]int, capacity),
 		capacity: capacity,
 		head: 0,
 		tail: 0,
@@ -26,10 +26,10 @@ func (q *Queue) enqueue(item int) bool {
 		return false
 	}
 
-	q.data[q.tail] = item
+	q.items[q.tail] = item
 	q.tail += 1
 
-	fmt.Printf("%d has enqueued to the Queue and updated Queue is %v \n", item, q.data)
+	fmt.Printf("%d has enqueued to the Queue and updated Queue is %v \n", item, q.items)
 
 	return true
 }
@@ -43,11 +43,11 @@ func (q *Queue) dequeue() (int, bool) {
 		return item, false
 	}
 
-	item = q.data[q.head]
-	q.data[q.head] = 0
+	item = q.items[q.head]
+	q.items[q.head] = 0
 	q.head += 1
 
-	fmt.Printf("%d has dequeued from the Queue and updated Queue is %v \n\n", item, q.data)
+	fmt.Printf("%d has dequeued from the Queue and updated Queue is %v \n\n", item, q.items)
 
 	return item, true
 }
@@ -59,9 +59,9 @@ func (q *Queue) peek() (int, bool) {
 		return 0, false
 	}
 
-	item := q.data[q.head]
+	item := q.items[q.head]
 
-	fmt.Printf("%d is the peek item of the Queue and the Queue is %v \n", item, q.data)
+	fmt.Printf("%d is the peek item of the Queue and the Queue is %v \n", item, q.items)
 
 	return item, true
 }

@@ -7,7 +7,7 @@ type Stack []int
 // Add an element to the top of a stack
 func (s *Stack) push(item int) {
 	*s = append(*s, item)
-	fmt.Printf("%d has pushed to the Stack and updated Stack is %v \n", item, *s)
+	fmt.Printf("%d has pushed to the stack and updated stack is %v \n", item, *s)
 }
 
 // Remove an element from the top of a stack
@@ -21,7 +21,7 @@ func (s *Stack) pop() (int, bool) {
 	index := len(*s) - 1
 	item, *s = (*s)[index], (*s)[:index]
 
-	fmt.Printf("%d has popped from the Stack and updated Stack is %v \n\n", item, *s)
+	fmt.Printf("%d has popped from the stack and updated stack is %v \n\n", item, *s)
 
 	return item, true
 }
@@ -36,7 +36,7 @@ func (s *Stack) peek() (int, bool) {
 	index := len(*s) - 1
 	item := (*s)[index]
 
-	fmt.Printf("%d is the peek value of the Stack and the Stack is %v \n", item, *s)
+	fmt.Printf("%d is the peek value of the stack and the stack is %v \n", item, *s)
 
 	return item, true
 }

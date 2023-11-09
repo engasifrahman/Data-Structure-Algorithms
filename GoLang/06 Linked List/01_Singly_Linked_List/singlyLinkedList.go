@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 type Node struct {
 	data int
@@ -12,7 +14,7 @@ type LinkedList struct {
 }
 
 // Insert at the beginning of the linked list
-func (list *LinkedList) InsertAtBeginning(data int) {
+func (list *LinkedList) insertAtBeginning(data int) {
 	newNode := &Node{
 		data: data, 
 		next: list.head,
@@ -22,7 +24,7 @@ func (list *LinkedList) InsertAtBeginning(data int) {
 }
 
 // Insert at the end of the linked list
-func (list *LinkedList) InsertAtEnd(data int) {
+func (list *LinkedList) insertAtEnd(data int) {
 	newNode := &Node{
 		data: data, 
 		next: nil,
@@ -42,7 +44,7 @@ func (list *LinkedList) InsertAtEnd(data int) {
 }
 
 // Insert after a given node in the linked list
-func (list *LinkedList) InsertAfter(node *Node, data int) {
+func (list *LinkedList) insertAfter(node *Node, data int) {
 	if node == nil {
 		fmt.Println("Invalid node provided")
 		return
@@ -52,37 +54,40 @@ func (list *LinkedList) InsertAfter(node *Node, data int) {
 		data: data, 
 		next: node.next,
 	}
+
 	node.next = newNode
 }
 
 // Delete a node from the linked list
-func (list *LinkedList) DeleteNode(data int) {
+func (list *LinkedList) deleteNode(data int) bool {
 	if list.head == nil {
-		return
+		return false
 	}
 
 	// Case 1: If the node to be deleted is the head node
 	if list.head.data == data {
 		list.head = list.head.next
-		return
+		return true
 	}
 
 	// Case 2: If the node to be deleted is not the head node
+	deleted := false
 	current := list.head
-	prev := current
-	for current != nil {
-		if current.data == data {
-			prev.next = current.next
-			return
+	for current.next != nil {
+		if current.next.data == data {
+			current.next = current.next.next
+			deleted = true
+			break
 		}
-		
-		prev = current
+
 		current = current.next
 	}
+
+	return deleted
 }
 
-// Display (traverse) the linked list
-func (list *LinkedList) Display() {
+// Traverse the linked list
+func (list *LinkedList) traverse() {
 	current := list.head
 	for current != nil {
 		fmt.Printf("%v ", current.data)
@@ -94,17 +99,15 @@ func (list *LinkedList) Display() {
 func main() {
 	list := LinkedList{}
 
-	list.InsertAtEnd(10)
-	list.InsertAtBeginning(20)
-	list.InsertAtBeginning(30)
-	list.InsertAtEnd(40)
-	list.InsertAfter(list.head.next, 50)
+	list.insertAtEnd(10)
+	list.insertAtBeginning(20)
+	list.insertAtBeginning(30)
+	list.insertAtEnd(40)
+	list.insertAfter(list.head.next, 50)
 
-	fmt.Print("Linked list: ")
-	list.Display()
+	list.traverse()
 
-	list.DeleteNode(40)
+	list.deleteNode(40)
 
-	fmt.Print("Linked list after deleting 30: ")
-	list.Display()
+	list.traverse()
 }

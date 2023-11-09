@@ -3,14 +3,13 @@ package main
 import "fmt"
 
 type Stack struct {
-    data []int
-    capacity int
-	top int
+    items []int
+    capacity, top int
 }
 
 func newStack(capacity int) *Stack {
     return &Stack{
-        data: make([]int, capacity),
+        items: make([]int, capacity),
         capacity: capacity,
 		top: 0,
     }
@@ -23,10 +22,10 @@ func (s *Stack) push(item int) bool {
         return false
     }
 
-    s.data[s.top] = item
+    s.items[s.top] = item
 	s.top++
 
-	fmt.Printf("%d has pushed to the Stack and updated Stack is %v \n", item, s.data)
+	fmt.Printf("%d has pushed to the Stack and updated Stack is %v \n", item, s.items)
 
 	return true
 }
@@ -41,10 +40,9 @@ func (s *Stack) pop() (int, bool) {
     }
 
 	s.top -= 1
-    item = s.data[s.top]
-    s.data[s.top] = 0
+    item, s.items[s.top] = s.items[s.top], 0
 
-	fmt.Printf("%d has popped from the Stack and updated Stack is %v \n\n", item, s.data)
+	fmt.Printf("%d has popped from the stack and updated stack is %v \n\n", item, s.items)
 
     return item, true
 }
@@ -56,9 +54,9 @@ func (s *Stack) peek() (int, bool) {
 		return 0, false
 	}
 
-	item := s.data[s.top - 1]
+	item := s.items[s.top - 1]
 
-	fmt.Printf("%d is the peek item of the Stack and the Stack is %v \n", item, s.data)
+	fmt.Printf("%d is the peek item of the stack and the stack is %v \n", item, s.items)
 
     return item, true
 }

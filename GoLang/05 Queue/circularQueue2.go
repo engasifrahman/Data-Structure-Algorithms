@@ -3,13 +3,13 @@ package main
 import "fmt"
 
 type Queue struct {
-	data []int
+	items []int
 	capacity int
 }
 
 func createQueue(capacity int) *Queue {
 	return &Queue{
-		data: make([]int, 0, capacity),
+		items: make([]int, 0, capacity),
 		capacity: capacity,
 	}
 }
@@ -21,9 +21,9 @@ func (q *Queue) enqueue(item int) bool {
 		return false
 	}
 
-	q.data = append(q.data, item)
+	q.items = append(q.items, item)
 
-	fmt.Printf("%d has enqueued to the Queue and updated Queue is %v \n", item, q.data)
+	fmt.Printf("%d has enqueued to the Queue and updated Queue is %v \n", item, q.items)
 
 	return true
 }
@@ -37,9 +37,9 @@ func (q *Queue) dequeue() (int, bool) {
 		return item, false
 	}
 
-	item, q.data = q.data[0], q.data[1:]
+	item, q.items = q.items[0], q.items[1:]
 
-	fmt.Printf("%d has dequeued from the Queue and updated Queue is %v \n\n", item, q.data)
+	fmt.Printf("%d has dequeued from the Queue and updated Queue is %v \n\n", item, q.items)
 
 	return item, true
 }
@@ -51,26 +51,26 @@ func (q *Queue) peek() (int, bool) {
 		return -1, false
 	}
 
-	item := q.data[0]
+	item := q.items[0]
 
-	fmt.Printf("%d is the peek item of the Queue and the Queue is %v \n", item, q.data)
+	fmt.Printf("%d is the peek item of the Queue and the Queue is %v \n", item, q.items)
 
 	return item, true
 }
 
 // Check if the queue is empty
 func (q *Queue) isEmpty() bool {
-	return len(q.data) == 0
+	return len(q.items) == 0
 }
 
 // Check if the queue is full
 func (q *Queue) isFull() bool {
-	return len(q.data) == q.capacity
+	return len(q.items) == q.capacity
 }
 
 func main() {
 	queue := createQueue(5)
-	fmt.Println(queue.data)
+	fmt.Println(queue.items)
 
     fmt.Println("Enqueuing elements to the Queue:")
 	queue.enqueue(1)

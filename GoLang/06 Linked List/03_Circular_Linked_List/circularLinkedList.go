@@ -13,7 +13,10 @@ type CircularLinkedList struct {
 
 // Insert at the beginning of the circular linked list
 func (list *CircularLinkedList) InsertAtBeginning(data int) {
-	newNode := &Node{data: data, next: nil}
+	newNode := &Node{
+		data: data, 
+		next: nil,
+	}
 
 	if list.head == nil {
 		newNode.next = newNode // Make the node point to itself to form a circular list
@@ -25,7 +28,7 @@ func (list *CircularLinkedList) InsertAtBeginning(data int) {
 		}
 		current.next = newNode
 		newNode.next = list.head
-		list.head = newNode
+		list.head = newNode 
 	}
 }
 
@@ -97,8 +100,8 @@ func (list *CircularLinkedList) DeleteNode(data int) {
 	}
 }
 
-// Display (traverse) the circular linked list
-func (list *CircularLinkedList) Display() {
+// Traverse the circular linked list
+func (list *CircularLinkedList) traverse() {
 	if list.head == nil {
 		fmt.Println("Circular linked list is empty.")
 		return
@@ -126,12 +129,9 @@ func main() {
 	list.InsertAfter(list.head, 25)
 	list.InsertAtEnd(70)
 
-
-	fmt.Print("Circular linked list: ")
-	list.Display()
+	list.traverse()
 
 	list.DeleteNode(30)
 
-	fmt.Print("Circular linked list after deleting node with data 30: ")
-	list.Display()
+	list.traverse()
 }

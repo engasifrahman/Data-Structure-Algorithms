@@ -3,13 +3,13 @@ package main
 import "fmt"
 
 type Stack struct {
-    data []int
+    items []int
     capacity int
 }
 
 func newStack(capacity int) *Stack {
     return &Stack{
-        data: make([]int, 0, capacity),
+        items: make([]int, 0, capacity),
         capacity: capacity,
     }
 }
@@ -21,9 +21,9 @@ func (s *Stack) push(item int) bool {
         return false
     }
 
-    s.data = append(s.data, item)
+    s.items = append(s.items, item)
 
-	fmt.Printf("%d has pushed to the Stack and updated Stack is %v \n", item, s.data)
+	fmt.Printf("%d has pushed to the stack and updated stack is %v \n", item, s.items)
 
 	return true
 }
@@ -37,10 +37,10 @@ func (s *Stack) pop() (int, bool) {
         return item, false
     }
 
-	index := len(s.data) - 1
-    item, s.data = s.data[index], s.data[:index]
+	index := len(s.items) - 1
+    item, s.items = s.items[index], s.items[:index]
 
-	fmt.Printf("%d has popped from the Stack and updated Stack is %v \n\n", item, s.data)
+	fmt.Printf("%d has popped from the stack and updated stack is %v \n\n", item, s.items)
 
     return item, true
 }
@@ -52,21 +52,21 @@ func (s *Stack) peek() (int, bool) {
 		return 0, false
 	}
 
-	item := s.data[len(s.data) - 1]
+	item := s.items[len(s.items) - 1]
 
-	fmt.Printf("%d is the peek item of the Stack and the Stack is %v \n", item, s.data)
+	fmt.Printf("%d is the peek item of the stack and the stack is %v \n", item, s.items)
 
     return item, true
 }
 
 // Check if the stack is empty
 func (s *Stack) isEmpty() bool {
-    return  len(s.data) == 0
+    return  len(s.items) == 0
 }
 
 // Check if the stack is full
 func (s *Stack) isFull() bool {
-    return  len(s.data) == s.capacity
+    return  len(s.items) == s.capacity
 }
 
 func main() {
