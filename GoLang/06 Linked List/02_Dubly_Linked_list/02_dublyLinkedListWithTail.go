@@ -14,7 +14,7 @@ type DoublyLinkedList struct {
 }
 
 // Insert at the beginning of the doubly linked list
-func (list *DoublyLinkedList) InsertAtBeginning(data int) {
+func (list *DoublyLinkedList) insertAtBeginning(data int) {
 	newNode := &Node {
 		data: data, 
 		prev: nil, 
@@ -34,7 +34,7 @@ func (list *DoublyLinkedList) InsertAtBeginning(data int) {
 }
 
 // Insert at the end of the doubly linked list
-func (list *DoublyLinkedList) InsertAtEnd(data int) {
+func (list *DoublyLinkedList) insertAtEnd(data int) {
 	newNode := &Node {
 		data: data, 
 		prev: list.tail, 
@@ -53,7 +53,7 @@ func (list *DoublyLinkedList) InsertAtEnd(data int) {
 }
 
 // Insert after a given node in the doubly linked list
-func (list *DoublyLinkedList) InsertAfter(node *Node, data int) {
+func (list *DoublyLinkedList) insertAfter(node *Node, data int) {
 	if node == nil {
 		fmt.Println("Invalid node provided")
 		return
@@ -77,7 +77,7 @@ func (list *DoublyLinkedList) InsertAfter(node *Node, data int) {
 }
 
 // Delete a node from the doubly linked list
-func (list *DoublyLinkedList) DeleteNode(node *Node) {
+func (list *DoublyLinkedList) deleteNode(node *Node) {
 	if node == nil {
 		fmt.Println("Invalid node provided")
 		return
@@ -97,7 +97,7 @@ func (list *DoublyLinkedList) DeleteNode(node *Node) {
 }
 
 // Delete a node from the doubly linked list by data value
-func (list *DoublyLinkedList) DeleteNodeByData(data int) {
+func (list *DoublyLinkedList) deleteNodeByData(data int) {
 	current := list.head
 
 	for current != nil {
@@ -124,8 +124,8 @@ func (list *DoublyLinkedList) DeleteNodeByData(data int) {
 	}
 }
 
-// Display (traverse) the doubly linked list in forward order
-func (list *DoublyLinkedList) DisplayForward() {
+// Traverse forward the doubly linked list in forward order
+func (list *DoublyLinkedList) traverseForward() {
 	current := list.head
 	for current != nil {
 		fmt.Printf("%d ", current.data)
@@ -134,8 +134,8 @@ func (list *DoublyLinkedList) DisplayForward() {
 	fmt.Println()
 }
 
-// Display (traverse) the doubly linked list in reverse order
-func (list *DoublyLinkedList) DisplayReverse() {
+// Traserve backward the doubly linked list in reverse order
+func (list *DoublyLinkedList) traserveBackward() {
 	current := list.tail
 	for current != nil {
 		fmt.Printf("%d ", current.data)
@@ -147,22 +147,18 @@ func (list *DoublyLinkedList) DisplayReverse() {
 func main() {
 	list := DoublyLinkedList{}
 
-	list.InsertAtEnd(10)
-	list.InsertAtBeginning(20)
-	list.InsertAtBeginning(30)
-	list.InsertAtEnd(40)
-	list.InsertAfter(list.head.next, 50)
+	list.insertAtEnd(10)
+	list.insertAtBeginning(20)
+	list.insertAtBeginning(30)
+	list.insertAtEnd(40)
+	list.insertAfter(list.head.next, 50)
 
-	fmt.Print("Doubly linked list (forward): ")
-	list.DisplayForward()
+	list.traverseForward()
+	list.traserveBackward()
 
-	fmt.Print("Doubly linked list (reverse): ")
-	list.DisplayReverse()
+	list.deleteNode(list.head.next)
+	list.deleteNodeByData(50)
 
-	list.DeleteNode(list.head.next)
-	list.DeleteNodeByData(50)
-
-
-	fmt.Print("Doubly linked list after deleting node: ")
-	list.DisplayForward()
+	list.traverseForward()
+	list.traserveBackward()
 }

@@ -12,34 +12,35 @@ type DoublyLinkedList struct {
 }
 
 // Insert at the beginning of the doubly linked list
-func (list *DoublyLinkedList) InsertAtBeggening(data int) {
-	newNode := &Node{
+func (l *DoublyLinkedList) insertAtBeginning(data int) {
+	newNode := &Node {
 		prev: nil,
 		data: data,
-		next: list.head,
+		next: l.head,
 	}
 
-	if list.head != nil {
-		list.head.prev = newNode
+	if l.head != nil {
+		l.head.prev = newNode
 	}
 
-	list.head = newNode;
+	l.head = newNode
 }
 
 // Insert at the end of the doubly linked list
-func (list *DoublyLinkedList) InsertAtEnd(data int) {
-	newNode := &Node{
+func (l *DoublyLinkedList) insertAtEnd(data int) {
+	newNode := &Node {
 		prev: nil,
 		data: data,
 		next: nil,
 	}
 
-	if list.head == nil {
-		list.head = newNode;
-		return
+	if l.head == nil {
+		l.head = newNode
+		return	
 	}
 
-	current := list.head
+	current := l.head
+
 	for current.next != nil {
 		current = current.next
 	}
@@ -49,14 +50,12 @@ func (list *DoublyLinkedList) InsertAtEnd(data int) {
 }
 
 // Insert after a given node in the doubly linked list
-func (list *DoublyLinkedList) InsertAfter(node *Node, data int) {
-
+func (l *DoublyLinkedList) insertAfter(node *Node, data int) {
 	if node == nil {
-		fmt.Println("Given node is empty");
 		return
 	}
 
-	newNode := &Node{
+	newNode := &Node {
 		prev: node,
 		data: data,
 		next: node.next,
@@ -64,84 +63,92 @@ func (list *DoublyLinkedList) InsertAfter(node *Node, data int) {
 
 	if node.next != nil {
 		node.next.prev = newNode
-	} 
+	}
 
 	node.next = newNode
 }
 
 // Delete a node from the doubly linked list by data value
-func (list *DoublyLinkedList) DeleteNode(data int) {
-	if list.head == nil {
-		return
+func (l *DoublyLinkedList) deleteNode(data int) bool {
+	if l.head == nil {
+		return false
 	}
-
+	
 	// Case 1: If the node to be deleted is the head node
-	if list.head.data == data {
-		if list.head.next != nil {
-			list.head.next.prev = nil
-		} 
+	if l.head.data == data {
+		if l.head.next != nil {
+			l.head.next.prev = nil
+		}
 
-		list.head = list.head.next
+		l.head = l.head.next
+
+		return true
 	}
 
 	// Case 2: If the node to be deleted is not the head node
-	current := list.head
-	prev := current
-	for current != nil {
-		if current.data == data { 
-			if current.next != nil {
-				current.next.prev = prev
-			}
-			prev.next = current.next
+	removed := false
+	current := l.head
 
+	for current.next != nil {
+		if current.next.data == data {
+			if current.next.next != nil {
+				current.next.next.prev = current
+			}
+			current.next = current.next.next
+
+			removed = true
+			break
 		}
 
-		prev = current
 		current = current.next
 	}
+
+	return removed
 }
 
-// DisplayForward prints the elements of the doubly linked list in forward order
-func (list *DoublyLinkedList) DisplayForward() {
-	fmt.Println("Doubly linked list (forward):")
-	current := list.head
+// Traverse forward prints the elements of the doubly linked list in forward order
+func (l *DoublyLinkedList) traverseForward() {
+	fmt.Print("\nForward traversal: ")
+
+	current := l.head
 	for current != nil {
-		fmt.Printf("%d ", current.data)
+		fmt.Printf("%d →", current.data)
 		current = current.next
 	}
-	fmt.Println()
 }
 
-// DisplayBackward prints the elements of the doubly linked list in backward order
-func (list *DoublyLinkedList) DisplayBackward() {
-	fmt.Println("Doubly linked list (backward):")
+// Traverse backward prints the elements of the doubly linked list in backward order
+func (l *DoublyLinkedList) traverseBackward() {
+	fmt.Print("\nBackward traversal: ")
+
 	// Find the last node in the list
-	current := list.head
-	for current != nil && current.next != nil {
+	current := l.head
+	for current != nil && current.next != nil{
 		current = current.next
 	}
-
+	
 	// Traverse backward and print the elements
 	for current != nil {
-		fmt.Printf("%d ", current.data)
+		fmt.Printf("%d →", current.data)
 		current = current.prev
 	}
-	fmt.Println()
 }
+
 
 func main() {
 	list := DoublyLinkedList{}
 
-	list.InsertAtBeggening(10)
-	list.InsertAtEnd(20)
-	list.InsertAtEnd(30)
-	list.InsertAtBeggening(70)
-	list.InsertAtEnd(40)
-	list.InsertAtEnd(50)
-	list.InsertAfter(list.head, 60)
+	list.insertAtBeginning(10)
+	list.insertAtEnd(20)
+	list.insertAtEnd(30)
+	list.insertAtBeginning(70)
+	list.insertAtEnd(40)
+	list.insertAtEnd(50)
+	list.insertAfter(list.head, 60)
 
-	list.DeleteNode(40)
+	list.deleteNode(40)
+	list.deleteNode(80)
 
-	list.DisplayForward()
-	list.DisplayBackward()
+	list.traverseForward()
+	list.traverseBackward()
 }
