@@ -28,12 +28,7 @@ func (list *CircularLinkedList) insertAtBeginning(data int) {
 	for current.next != list.head {
 		current = current.next
 	}
-
-		current.next = newNode
-		current.next = newNode
-		newNode.next = list.head
 	current.next = newNode
-		newNode.next = list.head
 	list.head = newNode 
 }
 
