@@ -7,31 +7,25 @@ type Vertex struct {
 	next *Vertex
 }
 
-func createVertex(v int) *Vertex {
+type Graph struct {
+	visited  []int
+	adjList  []*Vertex
+	capacity int
+}
+
+func createGraph(capacity int) *Graph {
+	return &Graph{
+		visited:  make([]int, capacity),
+		adjList:  make([]*Vertex, capacity),
+		capacity: capacity,
+	}
+}
+
+func (g *Graph) createVertex(v int) *Vertex {
 	return &Vertex{
 		data: v,
 		next: nil,
 	}
-}
-
-type Graph struct {
-	capacity int
-	visited []int
-	adjLists []*Vertex
-}
-
-func createGraph(capacity int) *Graph {
-	g := &Graph{
-		capacity: capacity,
-	}
-	g.visited = make([]int, capacity)
-	g.adjLists = make([]*Vertex, capacity)
-
-	for i := 0; i < capacity; i++ {
-		g.visited[i] = 0
-	}
-
-	return g
 }
 
 func (g *Graph) addEdge(src, dest int) bool {
@@ -42,21 +36,21 @@ func (g *Graph) addEdge(src, dest int) bool {
 	}
 
 	// Add edge from src to dest
-	destVertex := createVertex(dest)
-	destVertex.next = g.adjLists[src]
-	g.adjLists[src] = destVertex
+	destVertex := g.createVertex(dest)
+	destVertex.next = g.adjList[src]
+	g.adjList[src] = destVertex
 
 	// Add edge from dest to src
-	srcVertex := createVertex(src)
-	srcVertex.next = g.adjLists[dest]
-	g.adjLists[dest] = srcVertex
+	srcVertex := g.createVertex(src)
+	srcVertex.next = g.adjList[dest]
+	g.adjList[dest] = srcVertex
 
 	return true
 }
 
 func (g *Graph) printGraph() {
 	for v := 0; v < g.capacity; v++ {
-		current := g.adjLists[v]
+		current := g.adjList[v]
 		fmt.Printf("\nVertex %d: ", v)
 		for current != nil {
 			fmt.Printf("%d -> ", current.data)
@@ -68,19 +62,17 @@ func (g *Graph) printGraph() {
 }
 
 func (g *Graph) dfs(start int) {
-	adjList := g.adjLists[start]
-	current := adjList
-
 	g.visited[start] = 1
-	fmt.Printf("Visited %d: ", start)
-	fmt.Println(g.visited)
 
+	fmt.Printf("\nVisited %d: %v", start, g.visited)
+
+	current := g.adjList[start]
 	for current != nil {
 		connectedVertex := current.data
-
 		if g.visited[connectedVertex] == 0 {
 			g.dfs(connectedVertex)
 		}
+
 		current = current.next
 	}
 }

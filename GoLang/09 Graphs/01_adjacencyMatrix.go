@@ -3,8 +3,8 @@ package main
 import "fmt"
 
 type Graph struct {
-	matrix   [][]int
-	capacity int
+	adjMatrix [][]int
+	capacity  int
 }
 
 func createGraph(capacity int) *Graph {
@@ -14,8 +14,8 @@ func createGraph(capacity int) *Graph {
 	}
 
 	return &Graph{
-		matrix:   adjMatrix,
-		capacity: capacity,
+		adjMatrix: adjMatrix,
+		capacity:  capacity,
 	}
 }
 
@@ -25,22 +25,22 @@ func (g *Graph) addEdge(v1, v2 int) {
 		return
 	}
 
-	g.matrix[v1][v2] = 1
-	g.matrix[v2][v1] = 1
+	g.adjMatrix[v1][v2] = 1
+	g.adjMatrix[v2][v1] = 1
 }
 
 func (g *Graph) removeEdge(v1, v2 int) {
-	if v1 >= g.capacity || v2 >= g.capacity || g.matrix[v1][v2] == 0 {
+	if v1 >= g.capacity || v2 >= g.capacity || g.adjMatrix[v1][v2] == 0 {
 		fmt.Printf("No edge between %d and %d\n", v1, v2)
 		return
 	}
 
-	g.matrix[v1][v2] = 0
-	g.matrix[v2][v1] = 0
+	g.adjMatrix[v1][v2] = 0
+	g.adjMatrix[v2][v1] = 0
 }
 
 func (g *Graph) printMatrix() {
-	for _, row := range g.matrix {
+	for _, row := range g.adjMatrix {
 		for _, val := range row {
 			fmt.Printf("%4d", val)
 		}

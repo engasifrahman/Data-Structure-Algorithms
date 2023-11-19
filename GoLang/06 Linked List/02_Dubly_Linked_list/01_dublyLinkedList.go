@@ -12,34 +12,34 @@ type DoublyLinkedList struct {
 }
 
 // Insert at the beginning of the doubly linked list
-func (l *DoublyLinkedList) insertAtBeginning(data int) {
+func (list *DoublyLinkedList) insertAtBeginning(data int) {
 	newNode := &Node {
 		prev: nil,
 		data: data,
-		next: l.head,
+		next: list.head,
 	}
 
-	if l.head != nil {
-		l.head.prev = newNode
+	if list.head != nil {
+		list.head.prev = newNode
 	}
 
-	l.head = newNode
+	list.head = newNode
 }
 
 // Insert at the end of the doubly linked list
-func (l *DoublyLinkedList) insertAtEnd(data int) {
+func (list *DoublyLinkedList) insertAtEnd(data int) {
 	newNode := &Node {
 		prev: nil,
 		data: data,
 		next: nil,
 	}
 
-	if l.head == nil {
-		l.head = newNode
+	if list.head == nil {
+		list.head = newNode
 		return	
 	}
 
-	current := l.head
+	current := list.head
 
 	for current.next != nil {
 		current = current.next
@@ -50,7 +50,7 @@ func (l *DoublyLinkedList) insertAtEnd(data int) {
 }
 
 // Insert after a given node in the doubly linked list
-func (l *DoublyLinkedList) insertAfter(node *Node, data int) {
+func (list *DoublyLinkedList) insertAfter(node *Node, data int) {
 	if node == nil {
 		return
 	}
@@ -69,25 +69,25 @@ func (l *DoublyLinkedList) insertAfter(node *Node, data int) {
 }
 
 // Delete a node from the doubly linked list by data value
-func (l *DoublyLinkedList) deleteNode(data int) bool {
-	if l.head == nil {
+func (list *DoublyLinkedList) deleteNode(data int) bool {
+	if list.head == nil {
 		return false
 	}
 	
 	// Case 1: If the node to be deleted is the head node
-	if l.head.data == data {
-		if l.head.next != nil {
-			l.head.next.prev = nil
+	if list.head.data == data {
+		if list.head.next != nil {
+			list.head.next.prev = nil
 		}
 
-		l.head = l.head.next
+		list.head = list.head.next
 
 		return true
 	}
 
 	// Case 2: If the node to be deleted is not the head node
 	removed := false
-	current := l.head
+	current := list.head
 
 	for current.next != nil {
 		if current.next.data == data {
@@ -107,10 +107,10 @@ func (l *DoublyLinkedList) deleteNode(data int) bool {
 }
 
 // Traverse forward prints the elements of the doubly linked list in forward order
-func (l *DoublyLinkedList) traverseForward() {
+func (list *DoublyLinkedList) traverseForward() {
 	fmt.Print("\nForward traversal: ")
 
-	current := l.head
+	current := list.head
 	for current != nil {
 		fmt.Printf("%d →", current.data)
 		current = current.next
@@ -118,11 +118,11 @@ func (l *DoublyLinkedList) traverseForward() {
 }
 
 // Traverse backward prints the elements of the doubly linked list in backward order
-func (l *DoublyLinkedList) traverseBackward() {
+func (list *DoublyLinkedList) traverseBackward() {
 	fmt.Print("\nBackward traversal: ")
 
 	// Find the last node in the list
-	current := l.head
+	current := list.head
 	for current != nil && current.next != nil{
 		current = current.next
 	}

@@ -8,12 +8,7 @@ type Node struct {
 	right *Node
 }
 
-// Height represents the height of a node.
-type Height struct {
-	height int
-}
-
-func CreateNode(data int) *Node {
+func createNode(data int) *Node {
 	return &Node {
 		data: data,
 		left: nil,
@@ -21,7 +16,7 @@ func CreateNode(data int) *Node {
 	}
 }
 
-func InsertLeft(rootNode *Node, leftNode *Node) bool {
+func insertLeft(rootNode *Node, leftNode *Node) bool {
 	if rootNode.left != nil {
 		fmt.Println("This node already assigned");
 		return false
@@ -32,7 +27,7 @@ func InsertLeft(rootNode *Node, leftNode *Node) bool {
 	return true
 }
 
-func InsertRight(rootNode *Node, rightNode *Node) bool {
+func insertRight(rootNode *Node, rightNode *Node) bool {
 	if rootNode.right != nil {
 		fmt.Println("This node already assigned");
 		return false
@@ -43,76 +38,58 @@ func InsertRight(rootNode *Node, rightNode *Node) bool {
 	return true
 }
 
-func DisplayPreorder(tree *Node) {
+func preorderTraversal(tree *Node) {
 	fmt.Print("->", tree.data)
 
 	if tree.left != nil {
-		DisplayPreorder(tree.left)
+		preorderTraversal(tree.left)
 	}
 
 	if tree.right != nil {
-		DisplayPreorder(tree.right)
+		preorderTraversal(tree.right)
 	}
 }
 
-func DisplayInorder(tree *Node) {
+func inorderTraversal(tree *Node) {
 	if tree.left != nil {
-		DisplayInorder(tree.left)
+		inorderTraversal(tree.left)
 	}
 
 	fmt.Print("->", tree.data)
 
 	if tree.right != nil {
-		DisplayInorder(tree.right)
+		inorderTraversal(tree.right)
 	}
 }
 
-func DisplayPostorder(tree *Node) {
+func postorderTraversal(tree *Node) {
 	if tree.left != nil {
-		DisplayPostorder(tree.left)
+		postorderTraversal(tree.left)
 	}
 	
 	if tree.right != nil {
-		DisplayPostorder(tree.right)
+		postorderTraversal(tree.right)
 	}
 
 	fmt.Print("->", tree.data)
 }
 
 // Check if the binary tree is height balanced.
-func checkHeightBalance(root *Node, height *Height) bool {
-	if root == nil {
-		height.height = 0
-		return true
+func isBalancedBinaryTree(node *Node) (bool, int) {
+	if node == nil {
+		return true, 0
 	}
 
-	fmt.Println("\n------------------")
-	fmt.Println("Node Data: ", root.data)
+	left, leftHeight := isBalancedBinaryTree(node.left)
+	right, rightHeight := isBalancedBinaryTree(node.right)
 
-	var leftHeight, rightHeight Height
+	height := max(leftHeight, rightHeight) + 1
 
-	l := checkHeightBalance(root.left, &leftHeight) 
-	r := checkHeightBalance(root.right, &rightHeight)
-
-	fmt.Println("\nBacktrack for: ", root.data)
-
-	fmt.Println("l: ", l)
-	fmt.Println("r: ", r)
-
-	leftHeightValue, rightHeightValue := leftHeight.height, rightHeight.height
-
-	fmt.Println("leftHeightValue: ", leftHeightValue)
-	fmt.Println("rightHeightValue: ", rightHeightValue)
-
-	height.height = max(leftHeightValue, rightHeightValue) + 1
-
-	fmt.Println("height.height: ", height.height)
-
-	if abs(leftHeightValue - rightHeightValue) >= 2 {
-		return false
+	if abs(leftHeight - rightHeight) > 1 {
+		return false, height
 	}
 
-	return l && r
+	return left && right, height
 }
 
 
@@ -133,32 +110,33 @@ func abs(a int) int {
 }
 
 func main() {
-	root := CreateNode(1)
-	node2 := CreateNode(2)
-	node3 := CreateNode(3)
-	node4 := CreateNode(4)
-	node5 := CreateNode(5)
-	node6 := CreateNode(6)
+	root := createNode(1)
+	node2 := createNode(2)
+	node3 := createNode(3)
+	node4 := createNode(4)
+	node5 := createNode(5)
+	node6 := createNode(6)
 
-	InsertLeft(root, node2)
-	InsertRight(root, node3)
+	insertLeft(root, node2)
+	insertRight(root, node3)
 
-	InsertLeft(node2, node4)
-	InsertRight(node2, node5)
+	insertLeft(node2, node4)
+	insertRight(node2, node5)
 
-	InsertLeft(node5, node6)
+	insertLeft(node3, node5)
+	insertLeft(node4, node6)
 
-	fmt.Print("DisplayPreorder")
-	DisplayPreorder(root)
+	fmt.Print("Preorder Traversal")
+	preorderTraversal(root)
 
-	fmt.Print("\nDisplayInorder")
-	DisplayInorder(root)
+	fmt.Print("\nInorder Traversal")
+	inorderTraversal(root)
 
-	fmt.Print("\nDisplayPostorder")
-	DisplayPostorder(root)
+	fmt.Print("\nPostorder Traversal")
+	postorderTraversal(root)
 
-	var height Height
-	if checkHeightBalance(root, &height) {
+	flag,_ := isBalancedBinaryTree(root)
+	if flag {
 		fmt.Println("\nThe tree is balanced")
 	} else {
 		fmt.Println("\nThe tree is not balanced")

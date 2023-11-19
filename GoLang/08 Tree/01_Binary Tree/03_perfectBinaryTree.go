@@ -8,7 +8,7 @@ type Node struct {
 	right *Node
 }
 
-func CreateNode(data int) *Node {
+func createNode(data int) *Node {
 	return &Node {
 		data: data,
 		left: nil,
@@ -16,7 +16,7 @@ func CreateNode(data int) *Node {
 	}
 }
 
-func InsertLeft(rootNode *Node, leftNode *Node) bool {
+func insertLeft(rootNode *Node, leftNode *Node) bool {
 	if rootNode.left != nil {
 		fmt.Println("This node already assigned");
 		return false
@@ -27,7 +27,7 @@ func InsertLeft(rootNode *Node, leftNode *Node) bool {
 	return true
 }
 
-func InsertRight(rootNode *Node, rightNode *Node) bool {
+func insertRight(rootNode *Node, rightNode *Node) bool {
 	if rootNode.right != nil {
 		fmt.Println("This node already assigned");
 		return false
@@ -38,37 +38,37 @@ func InsertRight(rootNode *Node, rightNode *Node) bool {
 	return true
 }
 
-func DisplayPreorder(tree *Node) {
+func preorderTraversal(tree *Node) {
 	fmt.Print("->", tree.data)
 
 	if tree.left != nil {
-		DisplayPreorder(tree.left)
+		preorderTraversal(tree.left)
 	}
 
 	if tree.right != nil {
-		DisplayPreorder(tree.right)
+		preorderTraversal(tree.right)
 	}
 }
 
-func DisplayInorder(tree *Node) {
+func inorderTraversal(tree *Node) {
 	if tree.left != nil {
-		DisplayInorder(tree.left)
+		inorderTraversal(tree.left)
 	}
 
 	fmt.Print("->", tree.data)
 
 	if tree.right != nil {
-		DisplayInorder(tree.right)
+		inorderTraversal(tree.right)
 	}
 }
 
-func DisplayPostorder(tree *Node) {
+func postorderTraversal(tree *Node) {
 	if tree.left != nil {
-		DisplayPostorder(tree.left)
+		postorderTraversal(tree.left)
 	}
 	
 	if tree.right != nil {
-		DisplayPostorder(tree.right)
+		postorderTraversal(tree.right)
 	}
 
 	fmt.Print("->", tree.data)
@@ -81,14 +81,18 @@ func findTreeHeight(root *Node) int {
 	}
 
 	leftHeight := findTreeHeight(root.left)
-
 	rightHeight := findTreeHeight(root.right)
 
-	if leftHeight > rightHeight {
-		return leftHeight + 1
+	return max(leftHeight, rightHeight) + 1
+}
+
+// Find maximum number
+func max(a int, b int) int {
+	if a > b {
+		return a
 	}
 
-	return rightHeight + 1
+	return b
 }
 
 // isLeaf checks if a node is a leaf (i.e., has no children).
@@ -128,31 +132,31 @@ func checkPerfect(node *Node, height, level int) bool {
 
 
 func main() {
-	root := CreateNode(1)
-	node2 := CreateNode(2)
-	node3 := CreateNode(3)
-	node4 := CreateNode(4)
-	node5 := CreateNode(5)
-	node6 := CreateNode(6)
-	node7 := CreateNode(7)
+	root := createNode(1)
+	node2 := createNode(2)
+	node3 := createNode(3)
+	node4 := createNode(4)
+	node5 := createNode(5)
+	node6 := createNode(6)
+	node7 := createNode(7)
 
-	InsertLeft(root, node2)
-	InsertRight(root, node3)
+	insertLeft(root, node2)
+	insertRight(root, node3)
 
-	InsertLeft(node2, node4)
-	InsertRight(node2, node5)
+	insertLeft(node2, node4)
+	insertRight(node2, node5)
 
-	InsertLeft(node3, node6)
-	InsertRight(node3, node7)
+	insertLeft(node3, node6)
+	insertRight(node3, node7)
 
-	fmt.Print("DisplayPreorder")
-	DisplayPreorder(root)
+	fmt.Print("Preorder Traversal")
+	preorderTraversal(root)
 
-	fmt.Print("\nDisplayInorder")
-	DisplayInorder(root)
+	fmt.Print("\nInorder Traversal")
+	inorderTraversal(root)
 
-	fmt.Print("\nDisplayPostorder")
-	DisplayPostorder(root)
+	fmt.Print("\nPostorder Traversal")
+	postorderTraversal(root)
 
-	fmt.Println("\nIsPerfectBinaryTree:", isPerfectBinaryTree(root))
+	fmt.Println("\nIs Perfect Binary Tree:", isPerfectBinaryTree(root))
 }

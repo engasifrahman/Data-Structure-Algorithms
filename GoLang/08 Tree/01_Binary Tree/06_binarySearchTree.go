@@ -4,40 +4,40 @@ import (
 	"fmt"
 )
 
-type node struct {
+type Node struct {
 	data   int
-	left  *node
-	right *node
+	left  *Node
+	right *Node
 }
 
 // Create a node
-func newNode(item int) *node {
-	return &node{
+func createNode(item int) *Node {
+	return &Node{
 		data: item, 
 		left: nil, 
 		right: nil,
 	}
 }
 
-// Inorder Traversal
-func inorder(root *node) {
+// InorderTraversal Traversal
+func inorderTraversal(root *Node) {
 	if root != nil {
 		// Traverse left
-		inorder(root.left)
+		inorderTraversal(root.left)
 
 		// Traverse root
 		fmt.Printf("%d -> ", root.data)
 
 		// Traverse right
-		inorder(root.right)
+		inorderTraversal(root.right)
 	}
 }
 
-func search(root *node, data int) int {
+func search(root *Node, data int) bool {
 	if root == nil {
-		return -1
+		return false
 	} else if data == root.data {
-		return root.data
+		return true
 	} else if data < root.data {
 		return search(root.left, data)
 	} else {
@@ -46,10 +46,10 @@ func search(root *node, data int) int {
 }
 
 // Insert a node
-func insert(root *node, data int) *node {
+func insert(root *Node, data int) *Node {
 	// Return a new node if the tree is empty
 	if root == nil {
-		return newNode(data)
+		return createNode(data)
 	}
 
 	// Traverse to the right place and insert the node
@@ -63,7 +63,7 @@ func insert(root *node, data int) *node {
 }
 
 // Find the inorder successor
-func findInorderSuccessor(node *node) *node {
+func findInorderSuccessor(node *Node) *Node {
 	current := node
 
 	// Find the leftmost leaf
@@ -75,7 +75,7 @@ func findInorderSuccessor(node *node) *node {
 }
 
 // Deleting a node
-func deleteNode(root *node, data int) *node {
+func deleteNode(root *Node, data int) *Node {
 	// Return if the tree is empty
 	if root == nil {
 		return root
@@ -101,17 +101,17 @@ func deleteNode(root *node, data int) *node {
 		// If the node has two children
 		temp := findInorderSuccessor(root.right)
 
-		// Place the inorder successor in position of the node to be deleted
+		// Place the inorderTraversal successor in position of the node to be deleted
 		root.data = temp.data
 
-		// Delete the inorder successor
+		// Delete the inorderTraversal successor
 		root.right = deleteNode(root.right, temp.data)
 	}
 	return root
 }
 
 func main() {
-	var root *node
+	var root *Node
 	root = insert(root, 8)
 	root = insert(root, 3)
 	root = insert(root, 1)
@@ -124,11 +124,12 @@ func main() {
 	sr := search(root, 10)
 	fmt.Println("Search Result: ", sr)
 
-	fmt.Print("Inorder traversal: ")
-	inorder(root)
+	fmt.Print("Inorder Traversal: ")
+	inorderTraversal(root)
 
-	fmt.Println("\nAfter deleting 10")
-	root = deleteNode(root, 1)
-	fmt.Print("Inorder traversal: ")
-	inorder(root)
+	fmt.Println("\nAfter deleting")
+	root = deleteNode(root, 9)
+
+	fmt.Print("Inorder Traversal: ")
+	inorderTraversal(root)
 }

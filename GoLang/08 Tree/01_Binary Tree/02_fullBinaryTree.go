@@ -8,7 +8,7 @@ type Node struct {
 	right *Node
 }
 
-func CreateNode(data int) *Node {
+func createNode(data int) *Node {
 	return &Node {
 		data: data,
 		left: nil,
@@ -16,59 +16,59 @@ func CreateNode(data int) *Node {
 	}
 }
 
-func InsertLeft(rootNode *Node, leftNode *Node) bool {
-	if rootNode.left != nil {
+func insertLeft(parentNode *Node, leftNode *Node) bool {
+	if parentNode.left != nil {
 		fmt.Println("This node already assigned");
 		return false
 	}
 
-	rootNode.left = leftNode
+	parentNode.left = leftNode
 
 	return true
 }
 
-func InsertRight(rootNode *Node, rightNode *Node) bool {
-	if rootNode.right != nil {
+func insertRight(parentNode *Node, rightNode *Node) bool {
+	if parentNode.right != nil {
 		fmt.Println("This node already assigned");
 		return false
 	}
 
-	rootNode.right = rightNode
+	parentNode.right = rightNode
 	
 	return true
 }
 
-func DisplayPreorder(tree *Node) {
+func preorderTraversal(tree *Node) {
 	fmt.Print("->", tree.data)
 
 	if tree.left != nil {
-		DisplayPreorder(tree.left)
+		preorderTraversal(tree.left)
 	}
 
 	if tree.right != nil {
-		DisplayPreorder(tree.right)
+		preorderTraversal(tree.right)
 	}
 }
 
-func DisplayInorder(tree *Node) {
+func inorderTraversal(tree *Node) {
 	if tree.left != nil {
-		DisplayInorder(tree.left)
+		inorderTraversal(tree.left)
 	}
 
 	fmt.Print("->", tree.data)
 
 	if tree.right != nil {
-		DisplayInorder(tree.right)
+		inorderTraversal(tree.right)
 	}
 }
 
-func DisplayPostorder(tree *Node) {
+func postorderTraversal(tree *Node) {
 	if tree.left != nil {
-		DisplayPostorder(tree.left)
+		postorderTraversal(tree.left)
 	}
 	
 	if tree.right != nil {
-		DisplayPostorder(tree.right)
+		postorderTraversal(tree.right)
 	}
 
 	fmt.Print("->", tree.data)
@@ -91,27 +91,26 @@ func isFullBinaryTree(tree *Node) bool {
 }
 
 func main() {
-	root := CreateNode(1)
-	node2 := CreateNode(2)
-	node3 := CreateNode(3)
-	node4 := CreateNode(4)
-	node5 := CreateNode(5)
+	root := createNode(1)
+	node2 := createNode(2)
+	node3 := createNode(3)
+	node4 := createNode(4)
+	node5 := createNode(5)
 
-	InsertLeft(root, node2)
-	InsertRight(root, node3)
+	insertLeft(root, node2)
+	insertRight(root, node3)
 
-	InsertLeft(node2, node4)
-	InsertRight(node2, node5)
+	insertLeft(node2, node4)
+	insertRight(node2, node5)
 
+	fmt.Print("Preorder Traversal")
+	preorderTraversal(root)
 
-	fmt.Print("DisplayPreorder")
-	DisplayPreorder(root)
+	fmt.Print("\nInorder Traversal")
+	inorderTraversal(root)
 
-	fmt.Print("\nDisplayInorder")
-	DisplayInorder(root)
+	fmt.Print("\nPostorder Traversal")
+	postorderTraversal(root)
 
-	fmt.Print("\nDisplayPostorder")
-	DisplayPostorder(root)
-
-	fmt.Println("\nIsFullBinaryTree:", isFullBinaryTree(root))
+	fmt.Println("\nIs Full Binary Tree:", isFullBinaryTree(root))
 }

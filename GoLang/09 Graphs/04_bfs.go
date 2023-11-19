@@ -10,7 +10,7 @@ type Vertex struct {
 type Graph struct {
 	capacity int
 	visited  []int
-	adjLists []*Vertex
+	adjList []*Vertex
 }
 
 type Queue struct {
@@ -25,34 +25,28 @@ func createVertex(v int) *Vertex {
 }
 
 func createGraph(capacity int) *Graph {
-	g := &Graph{
+	return &Graph{
+		visited: make([]int, capacity),
+		adjList: make([]*Vertex, capacity),
 		capacity: capacity,
 	}
-	g.visited = make([]int, capacity)
-	g.adjLists = make([]*Vertex, capacity)
-
-	for i := 0; i < capacity; i++ {
-		g.visited[i] = 0
-	}
-
-	return g
 }
 
 func (g *Graph) addEdge(src, dest int) {
 	// Add edge from src to dest
 	destVertex := createVertex(dest)
-	destVertex.next = g.adjLists[src]
-	g.adjLists[src] = destVertex
+	destVertex.next = g.adjList[src]
+	g.adjList[src] = destVertex
 
 	// Add edge from dest to src
 	srcVertex := createVertex(src)
-	srcVertex.next = g.adjLists[dest]
-	g.adjLists[dest] = srcVertex
+	srcVertex.next = g.adjList[dest]
+	g.adjList[dest] = srcVertex
 }
 
 func (g *Graph) printGraph() {
 	for v := 0; v < g.capacity; v++ {
-		current := g.adjLists[v]
+		current := g.adjList[v]
 		fmt.Printf("\nVertex %d: ", v)
 		for current != nil {
 			fmt.Printf("%d -> ", current.data)
@@ -100,7 +94,7 @@ func (g *Graph) bfs(start int) {
 		fmt.Printf("\nVisited %d: ", vertex)
 		fmt.Println(g.visited)
 
-		current := g.adjLists[vertex]
+		current := g.adjList[vertex]
 		for current != nil {
 			connectedVertex := current.data
 			if g.visited[connectedVertex] == 0 {
