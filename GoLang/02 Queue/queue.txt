@@ -1,0 +1,38 @@
+# ---------------------------------------------------------------------------- #
+#                                 What is Queue                                #
+# ---------------------------------------------------------------------------- #
+A queue is a useful data structure in programming. It is similar to the ticket queue outside a cinema hall, 
+where the first person entering the queue is the first person who gets the ticket.
+
+Queue follows the First In First Out (FIFO) rule - the item that goes in first is the item that comes out first.
+
+# ---------------------------------------------------------------------------- #
+#                           Basic Operations of Queue                          #
+# ---------------------------------------------------------------------------- #
+A queue is an object (an abstract data structure - ADT) that allows the following operations:
+
+Enqueue: Add an element to the end of the queue
+Dequeue: Remove an element from the front of the queue
+IsEmpty: Check if the queue is empty
+IsFull: Check if the queue is full
+Peek: Get the value of the front of the queue without removing it
+
+# ---------------------------------------------------------------------------- #
+#                             Limitations of Queue                             #
+# ---------------------------------------------------------------------------- #
+After a bit of enqueuing and dequeuing, the size of the queue has been reduced.
+
+# ---------------------------------------------------------------------------- #
+#                              Complexity Analysis                             #
+# ---------------------------------------------------------------------------- #
+The complexity of enqueue and dequeue operations in a queue using an array is O(1).
+
+# ---------------------------------------------------------------------------- #
+#                             Applications of Queue                            #
+# ---------------------------------------------------------------------------- #
+- CPU scheduling, Disk scheduling
+- When data is transferred asynchronously between two processes. The queue is used for synchronization. For example: IO Buffers, pipes, file IO, etc
+- Handling of interrupts in real-time systems.
+- Call center phone systems use Queues to hold people calling them in order.
+
+# ----------------- Ref: https://www.programiz.com/dsa/queue ----------------- #

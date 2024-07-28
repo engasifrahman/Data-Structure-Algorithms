@@ -1,21 +1,21 @@
-01 Pointer/practice
-02 Struct/practice
-03 Interface/practice
-04 Stack/practice
-05 Queue/practice
-06 Linked List/01_Singly_Linked_List/practice
-06 Linked List/02_Dubly_Linked_list/practice
-06 Linked List/03_Circular_Linked_List/practice
-07 Hash Map/practice
-08 Tree/practice
-09 Graphs/practice
-10 Greedy/practice
-11 Dynamic Programing/practice
-12 Searching/practice
-13 Sorting/practice
-14 Others/practice
+01 Stack/practice
+02 Queue/practice
 
+03 Linked List/01 Singly Linked List/practice
+03 Linked List/02 Dubly Linked list/practice
+03 Linked List/03 Circular Linked List/practice
 
+04 Hash Map/01 Separate Chaining/practice
+04 Hash Map/02 Open Addressing/practice
 
+05 Tree/00 Recursion/practice
+05 Tree/01 Binary Tree/practice
 
-
+06 Heap/practice
+07 Graphs/practice
+08 Greedy/practice
+09 Dynamic Programing/practice
+10 Searching/practice
+11 Sorting/practice
+12 String/practice
+13 Others/practice
