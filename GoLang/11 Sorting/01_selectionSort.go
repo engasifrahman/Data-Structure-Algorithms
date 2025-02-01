@@ -6,8 +6,8 @@
 
 // Procedures
 // It sorts from left to right
-// First loop will run n-1 times, and will start from 0 index to (n-1)th index
-// Second loop will run [(n-1), (n-2), (n-3), (n-4), ..., 1] times, and will start from 1 index to nth index
+// First loop will run n-1 times, and will start from 0th index to (n-1)th index
+// Second loop will run maximum of [(n-1), (n-2), (n-3), (n-4), ..., 1] times, and will start from 1st index to nth index
 
 package main
 import "fmt"

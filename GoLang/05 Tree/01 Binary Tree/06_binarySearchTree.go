@@ -128,7 +128,7 @@ func main() {
 	inorderTraversal(root)
 
 	fmt.Println("\nAfter deleting")
-	root = deleteNode(root, 9)
+	root = deleteNode(root, 3)
 
 	fmt.Print("Inorder Traversal: ")
 	inorderTraversal(root)

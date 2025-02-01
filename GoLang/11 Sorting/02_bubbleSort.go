@@ -6,8 +6,8 @@
 
 // Procedures
 // It sorts from right to left
-// First loop will run n-1 times, and will start from 1 index to nth index
-// Second loop will run [(n-1), (n-2), (n-3), ..., 1] times, and will start from 0 index to (n-1)th index
+// First loop will run n-1 times, and will start from 1st index to nth index
+// Second loop will run [(n-1), (n-2), (n-3), ..., 1] times, and will start from 0th index to (n-1)th index
 
 package main
 
